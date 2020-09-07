@@ -189,7 +189,7 @@ namespace Cynthia.Card
         }
 
         //更新CardMap内容请务必将CardMapVersion更新
-        public static Version CardMapVersion { get; } = new Version(1, 0, 0, 66);
+        public static Version CardMapVersion { get; } = new Version(1, 0, 0, 67);
 
 
         public class MultilingualString
@@ -11481,7 +11481,7 @@ namespace Cynthia.Card
                 {
                     CardId ="70046",
                     Name="帝国占卜师",
-                    Strength=8,
+                    Strength=100,
                     Group=Group.Copper,
                     Faction = Faction.Nilfgaard,
                     CardUseInfo = CardUseInfo.MyRow,
