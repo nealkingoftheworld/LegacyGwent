@@ -1,37 +1,17 @@
-name: tagged-release
+name: Build project
 
-on:
-  push:
-    tags:
-      - "v*"
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  create_release:
-    name: Create release
-    runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.draft_release.outputs.upload_url }}
-    steps:
-      - name: Create release
-        id: draft_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
-    needs: create_release
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         targetPlatform:
-          - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-          - StandaloneLinux64 # Build a Linux 64-bit standalone.
+          - Android # Build an Android .apk standalone app.
+          - iOS # Build an iOS player.
     steps:
       - uses: actions/checkout@v2
         with:
@@ -51,6 +31,5 @@ jobs:
           buildName: DiyGwent-${{ matrix.targetPlatform }}
       - uses: actions/upload-artifact@v2
         with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
           name: DiyGwent-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
