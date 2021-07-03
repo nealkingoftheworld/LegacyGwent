@@ -69,10 +69,11 @@ public class ArtCard : MonoBehaviour
             use.CardUseInfo = CardInfo.CardUseInfo;
         if (CurrentCore.CardArtsId != null)
         {
-            Addressables.LoadAssetAsync<Sprite>(CurrentCore.CardArtsId).Completed += (obj) =>
-            {
-                CardImg.sprite = obj.Result;
-            };
+            // Addressables.LoadAssetAsync<Sprite>(CurrentCore.CardArtsId).Completed += (obj) =>
+            // {
+            //     CardImg.sprite = obj.Result;
+            // };
+            CardImg.sprite = Addressables.LoadAssetAsync<Sprite>(CurrentCore.CardArtsId).WaitForCompletion();
         }
         //设置卡牌是否灰(转移到属性)
         //如果卡牌是背面,设置背面并结束

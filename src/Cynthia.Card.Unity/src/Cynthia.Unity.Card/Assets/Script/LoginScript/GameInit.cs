@@ -2,12 +2,14 @@
 using Cynthia.Card.Client;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Assets.Script.Localization;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.AddressableAssets;
 
 public class GameInit : MonoBehaviour
 {
@@ -32,6 +34,7 @@ public class GameInit : MonoBehaviour
         _translator = DependencyResolver.Container.Resolve<LocalizationService>();
         ConfigureGame();
         LoadServerMessage();
+        Addressables.InitializeAsync();
     }
 
     public void ExitClick()
