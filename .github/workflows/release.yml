@@ -31,8 +31,6 @@ jobs:
       matrix:
         targetPlatform:
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-          - StandaloneLinux64 # Build a Linux 64-bit standalone.
     steps:
       - uses: actions/checkout@v2
         with:
@@ -55,3 +53,4 @@ jobs:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
           asset_name: DiyGwent-${{ matrix.targetPlatform }}
           asset_path: build/${{ matrix.targetPlatform }}
+          asset_content_type: .zip
